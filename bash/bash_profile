@@ -1,0 +1,148 @@
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+
+# =============
+# ALIASES
+# =============
+
+# Config
+alias bashrc="vim ~/.bash_profile"
+alias reload=". ~/.bash_profile; echo ~\/.bash_profile has been updated"
+alias vimrc="vim ~/.vimrc"
+alias gitconf="vim ~/.gitconfig"
+
+
+# Directories
+alias dev="cd ~/dev"
+alias tuts="cd ~/dev/tuts"
+
+
+function b {
+
+  case "$1" in
+    net) cd ~/dev/behance/be.net
+        ;;
+    bff) cd ~/dev/behance/BeFF
+        ;;
+    core) cd ~/dev/behance/core
+        ;;
+    bodega) cd ~/bodega/dev
+        ;;
+    blog) cd ~/dev/behance/behance.github.io
+        ;;
+    *) cd ~/dev/behance
+        ;;
+  esac
+
+  echo $1
+
+}
+
+
+
+
+
+# ==========================
+# UTILITIES AND APPS
+# ==========================
+
+# PHP Unit
+alias phpu="./vendor/bin/phpunit"
+alias phpud="./vendor/bin/phpunit --testdox"
+alias coverage="./vendor/bin/phpunit --coverage-html ~/Desktop/test-coverage"
+
+
+
+
+
+# =============
+# GIT
+# =============
+
+alias gco='git checkout'
+alias gc='git add . -A && git commit -am'
+alias gs='git status'
+alias gb='git branch'
+alias ga='git add .'
+alias gm='git merge'
+alias gup='git fetch upstream && git pull upstream master'
+alias guprm='git checkout - && git fetch upstream && git pull upstream master && git checkout - && git rebase master'
+alias gam='git add . -A && git commit --amend'
+alias grm='git rebase master'
+alias gitignorelocal='vim .git/info/exclude'  # must be in the base repo directory
+alias yolo="git reset --hard"
+
+
+
+
+
+
+# ===============
+# FILE WATCHERS
+# ===============
+
+function fsw(){
+  cd ~/dev/behance/be.net && fswatch -o . -e .git | xargs -n1 -I{} rsync -avz -e "ssh -p 2222 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" --port 2222 --exclude *.git --exclude *.vagrant . sbelsky@bodega:/var/www/vhosts/$1/sandbox/
+}
+
+function scss(){
+  bundle exec compass watch --sourcemap /Users/landry/dev/behance/be.net/public/assets/sass
+}
+
+
+
+
+
+# ===================
+# CUSTOMIZE PROMPT
+# ===================
+
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "[${BRANCH}${STAT}] "
+	else
+		echo ""
+	fi
+}
+
+# get current status of git repo
+function parse_git_dirty {
+	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
+
+# export PS1="\[\e[32m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\]\w\[\e[m\]: "
