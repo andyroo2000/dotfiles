@@ -1,0 +1,11 @@
+{
+	"phpcs_php_path": "/usr/local/bin/php",
+	"phpcs_executable_path": "/usr/local/bin/phpcs",
+	"phpcs_show_errors_in_status": true,
+	"phpcs_show_gutter_marks": true,
+	"phpcs_outline_for_errors": true,
+	"phpcs_additional_args": {
+		"--standard": "Behance",
+		"-n": ""
+	}
+}

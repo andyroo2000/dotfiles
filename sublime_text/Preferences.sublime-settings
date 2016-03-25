@@ -1,0 +1,20 @@
+{
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/User/SublimeLinter/Material-Theme-Darker-OceanicNext (SL).tmTheme",
+	"font_size": 12,
+	"ignore_vcs_packages": true,
+	"ignored_packages":
+	[
+		"Git"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
+	"overlay_scroll_bars": "enabled",
+	"theme": "Material-Theme.sublime-theme",
+	"trim_trailing_white_space_on_save": true
+}
