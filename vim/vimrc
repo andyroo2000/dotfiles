@@ -1,4 +1,31 @@
-" GENERAL PREFERENCES
+"------------------------"
+" VUNDLE PLUGIN MANAGER
+"------------------------"
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'               " let Vundle manage Vundle, required
+Plugin 'scrooloose/nerdtree'                " graphical file browser
+Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy file-searcher
+Plugin 'altercation/vim-colors-solarized'   " colorscheme
+Plugin 'scrooloose/nerdcommenter'           " comment and uncomment code easily
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+
+
+
+
+
+"------------------------"
+" GENERAL SETTINGS
+"------------------------"
+syntax on
 
 set number                " show line numbers
 set cursorline            " highlight current line
@@ -9,9 +36,27 @@ set pastetoggle=<F2>      " toggle indentation settings for pasting into Vim
 set timeoutlen=500        "Ever notice a slight lag after typing the leader key + command? This lowers the timeout.
 
 
+"Move up and down by one screen line when wrapped
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
+"Write the old file out when switching between files.
+set autowrite
+
+set t_Co=256              " enable 256-color mode.
+set background=light
+colorscheme solarized
+let g:solarized_termcolors=256
+
+
+
+
+
+"------------------------"
 " BETTER KEY MAPPINGS
-
+"------------------------"
 let mapleader = ','       "Change default leader key
 
 imap jj <esc>             " Map escape key to jj -- much faster
@@ -23,8 +68,11 @@ nmap <leader>n :noh <CR>
 
 
 
-" SEARCHING
 
+
+"------------------------"
+" SEARCHING
+"------------------------"
 set incsearch             " Set incremental searching
 set hlsearch              " Highlight searching
 
@@ -34,8 +82,11 @@ set smartcase
 
 
 
-" SPLITS
 
+
+"------------------------"
+" SPLITS
+"------------------------"
 " Shortcut to opening a virtual split to right of current pane
 " Makes more sense than opening to the left
 nmap <leader>bv :bel vsp
@@ -48,3 +99,40 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+
+
+
+
+"------------------------"
+"NERDTREE PLUGIN SETTINGS
+"------------------------"
+"Shortcut for NERDTreeToggle
+nmap <leader>nt :NERDTreeToggle <CR>
+
+"Show hidden files in NerdTree  
+let NERDTreeShowHidden=1  
+let NERDTreeQuitOnOpen=1
+
+
+
+
+
+"------------------------"
+"CTRL-P PLUGIN SETTINGS
+"------------------------"
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+
+
+
+
+"NERD COMMENTER PLUGIN SETTINGS
+"------------------------"
+" Faster shortcut for commenting. Requires T-Comment plugin
+map <leader>c <c-_><c-_>
