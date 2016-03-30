@@ -51,7 +51,7 @@ colorscheme solarized
 let g:solarized_termcolors=256
 
 
-
+ 
 
 
 "------------------------"
@@ -59,7 +59,7 @@ let g:solarized_termcolors=256
 "------------------------"
 let mapleader = ','       "Change default leader key
 
-imap jj <esc>             " Map escape key to jj -- much faster
+inoremap jj <esc>         " Map escape key to jj -- much faster
 
 " make saving and quiting more ergonomic
 nmap <leader>s :w <CR>
@@ -126,7 +126,7 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 
 
@@ -134,5 +134,6 @@ let g:ctrlp_cmd = 'CtrlP'
 
 "NERD COMMENTER PLUGIN SETTINGS
 "------------------------"
-" Faster shortcut for commenting. Requires T-Comment plugin
-map <leader>c <c-_><c-_>
+" Faster shortcut for commenting.
+:vmap <c-a> <leader>ci         " toggle commenting on current line
+:nmap <c-a> <leader>c<space>   " toggle commenting on current selection in visual mode
