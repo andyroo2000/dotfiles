@@ -9,6 +9,7 @@ echo -n "Have you done both?: "
 read ready
 
 if [ $ready == "yes" || $ready == "y" ]; then
+
 	echo -n "Nice! You're ready to go!"
 	echo ""
 
@@ -17,16 +18,15 @@ if [ $ready == "yes" || $ready == "y" ]; then
 	git clone git@github.com:andyroo2000/dotfiles.git
 
 	# CREATE SYMLINKS FOR SUBLIME PREFERENCES AND PACKAGE SETTINGS
+	cd ~/Library/Application Support/Sublime Text 3/Packages/User
 	ln -s ~/dotfiles/sublime_text/Package\ Control.sublime-settings Package\ Control.sublime-settings
 	ln -s ~/dotfiles/sublime_text/Preferences.sublime-settings Preferences.sublime-settings
 	ln -s ~/dotfiles/sublime_text/phpcs.sublime-settings phpcs.sublime-settings
 
-
-
 	# CREATE SYMLINK FOR GLOBAL GIT IGNORE AND MAKE SURE GIT IS USING IT
+	cd ~
 	ln -s dotfiles/git/gitignore_global .gitignore_global
 	git config --global core.excludesfile '~/.gitignore'
-
 
 	# CREATE SYMLINKS FOR VIMRC AND CLONE VUNDLE PLUGIN MANAGER INTO THE RIGHT DIRECTORY
 	ln -s dotfiles/vim/vimrc .vimrc
