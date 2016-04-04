@@ -14,6 +14,7 @@
 		"Facebook Material Theme",
 		"Git",
 		"HTML Mustache",
+		"JSHint Gutter",
 		"Material Color Scheme",
 		"Material Theme",
 		"Material Theme - Appbar",
@@ -26,6 +27,7 @@
 		"SCSS",
 		"SublimeLinter",
 		"SublimeLinter-jscs",
+		"SublimeLinter-jshint",
 		"VAlign",
 		"WordHighlight"
 	]
