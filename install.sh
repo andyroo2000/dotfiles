@@ -1,22 +1,5 @@
 # GIT AND SUBLIME MUST BE INTALLED BEFORE RUNNING THIS SCRIPT
 
-# ASK IF THE USER IS READY
-echo -n "Git must be installed and configured before running this script. You must also have already install Sublime Text 3."
-echo ""
-echo -n "Have you done both?: "
-
-# GET USER INPUT
-read ready
-
-if [ $ready == "yes" || $ready == "y" ]; then
-
-	echo -n "Nice! You're ready to go!"
-	echo ""
-
-	# CLONE DOTFILES REPO INTO HOME DIRECTORY
-	cd ~
-	git clone git@github.com:andyroo2000/dotfiles.git
-
 	# CREATE SYMLINKS FOR SUBLIME PREFERENCES AND PACKAGE SETTINGS
 	cd ~/Library/Application Support/Sublime Text 3/Packages/User
 	ln -s ~/dotfiles/sublime_text/Package\ Control.sublime-settings Package\ Control.sublime-settings
@@ -35,7 +18,3 @@ if [ $ready == "yes" || $ready == "y" ]; then
 	# CREATE SYMLINK FOR CUSTOM BASH PROFILE
 	ln -s dotfiles/bash/bash_profile .bash_profile
 
-else
-	echo -n "Get your life together and come back when you're ready."
-	echo ""
-fi
