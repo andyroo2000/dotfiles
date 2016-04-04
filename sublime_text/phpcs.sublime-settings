@@ -7,5 +7,10 @@
 	"phpcs_additional_args": {
 		"--standard": "Behance",
 		"-n": ""
-	}
+	},
+	"phpmd_run": true,
+	"phpmd_command_on_save": true,
+	"phpmd_executable_path":
+	"/usr/local/bin/phpmd",
+	"phpmd_additional_args": { "unusedcode": "" }
 }
