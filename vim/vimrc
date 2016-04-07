@@ -13,6 +13,7 @@ Plugin 'scrooloose/nerdtree'                " graphical file browser
 Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy file-searcher
 Plugin 'altercation/vim-colors-solarized'   " colorscheme
 Plugin 'scrooloose/nerdcommenter'           " comment and uncomment code easily
+Plugin 'racer-rust/vim-racer'               " Rust code-completion
 
 call vundle#end()            " required
 filetype plugin indent on    " required

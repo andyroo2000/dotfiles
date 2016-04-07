@@ -41,3 +41,4 @@ temp/
 
 .phpintel/
 DS_Store
+.idea/

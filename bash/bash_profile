@@ -1,5 +1,41 @@
 export PATH="$HOME/.rbenv/bin:$PATH"
+export FOO="my value"
+
 eval "$(rbenv init -)"
+eval "$(hub alias -s)"
+eval "$(fasd --init auto)"
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+
+
+
+# ============================
+# DOCKER
+# ============================
+
+eval $(docker-machine env dev)
+
+# docker-machine
+if which docker-machine > /dev/null; then
+  export DOCKER_TLS_VERIFY="1"
+  export DOCKER_HOST="tcp://172.16.162.128:2376"
+  export DOCKER_CERT_PATH="/Users/landry/.docker/machine/machines/dev"
+  export DOCKER_MACHINE_NAME="dev"
+fi
+
+
+alias dc="docker-compose"
+alias dm="docker-machine"
+
+
+# Docker Enter - to SSH into a docker machine - ex: de some-container-id
+function de {
+  docker exec -it $1 bash
+}
+
+
 
 
 # ============================
@@ -29,20 +65,21 @@ alias dev="cd ~/dev"
 alias tuts="cd ~/dev/tuts"
 
 
+
 function b {
 
   case "$1" in
-    net) cd ~/dev/behance/be.net
+    net) cd ~/dev/behance-flotilla/behance/be.net
         ;;
-    bff) cd ~/dev/behance/BeFF
+    ccn) cd ~/dev/behance/ccn
         ;;
-    core) cd ~/dev/behance/core
+    sniffs) cd ~/dev/behance/php-sniffs
         ;;
     bodega) cd ~/bodega/dev
         ;;
-    blog) cd ~/dev/behance/behance.github.io
+    newton) cd ~/.flotilla/stacks/fig-newton-configs 
         ;;
-    *) cd ~/dev/behance
+    *) cd ~/dev/behance-flotilla/behance
         ;;
   esac
 
@@ -83,7 +120,17 @@ alias gam='git add . -A && git commit --amend'
 alias grm='git rebase master'
 alias gitignorelocal='vim .git/info/exclude'  # must be in the base repo directory
 alias yolo="git reset --hard"
+alias gdeletebranches="git branch | grep -v "master" | xargs git branch -D"
 
+alias git=hub
+
+function gnew() {
+  git checkout master && git fetch upstream && git pull upstream master && git checkout -b $1
+}
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
 
 
 
@@ -93,15 +140,9 @@ alias yolo="git reset --hard"
 # FILE WATCHERS
 # ===============
 
-function fsw(){
-  cd ~/dev/behance/be.net && fswatch -o . -e .git | xargs -n1 -I{} rsync -avz -e "ssh -p 2222 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" --port 2222 --exclude *.git --exclude *.vagrant . sbelsky@bodega:/var/www/vhosts/$1/sandbox/
+function scssccn() {
+  bundle exec compass watch --sourcemap /Users/landry/dev/behance/ccn/public/assets/sass
 }
-
-function scss(){
-  bundle exec compass watch --sourcemap /Users/landry/dev/behance/be.net/public/assets/sass
-}
-
-
 
 
 
